@@ -8,5 +8,6 @@ import (
 
 func main() {
 	fmt.Println("tinyVM")
-	vm.New()
+	m := vm.New()
+	m.Run()
 }
