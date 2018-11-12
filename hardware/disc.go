@@ -8,13 +8,18 @@ var startup = []byte{
 
 // Disc ... disc
 type Disc struct {
-	Content []byte
+	content []byte
 }
 
 // Init ... Init
 func (d *Disc) Init() {
 	fmt.Println("[*] Init Disc...")
-	d.Content = make([]byte, 0x100)
+	d.content = make([]byte, 0x100)
 	fmt.Println("[*] Copying startup content...")
-	copy(d.Content, startup)
+	copy(d.content, startup)
+}
+
+// GetContent ... get contents
+func (d *Disc) GetContent(position, len int) []byte {
+	return d.content[position : position+len]
 }

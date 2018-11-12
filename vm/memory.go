@@ -24,7 +24,7 @@ func (m *Memory) Dump() {
 
 // FetchFromDisc ... Fetch data from Disc and fill memory
 func (m *Memory) FetchFromDisc(d *hw.Disc, position, len, moffset int) {
-	copy(m.memory[moffset:], d.Content[position:position+len])
+	copy(m.memory[moffset:], d.GetContent(position, len))
 }
 
 // GetContent ... get memory contents
