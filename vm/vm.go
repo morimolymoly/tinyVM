@@ -36,26 +36,32 @@ func New() VM {
 	vm.memory.Init()
 	vm.disc.Init()
 	vm.memory.FetchFromDisc(vm.disc, 0x0, 0x4, 0x0)
-	vm.memory.Dump()
 	vm.reg.ip = 0x0
 	return vm
 }
 
 // Run ... run
 func (vm *VM) Run() {
+	fmt.Println("[*] tinyVM start!")
 	for {
-		i := vm.fetchInstructionCode()
-		op := i[0] & 0xf0
-		if op == 0x0 {
-			fmt.Println("HLT!")
+		i := vm.fetchCode()
+		if !vm.executeCode(i) {
 			break
 		}
-		fmt.Printf("0x%x Not implemented\n", op)
 	}
+	fmt.Println("[*] tinyVM end!")
 	return
 }
 
-func (vm *VM) fetchInstructionCode() []byte {
+func (vm *VM) executeCode(code []byte) bool {
+	op := code[0] & 0xf0
+	if op == 0x0 {
+		return cHlt()
+	}
+	return badInstruction()
+}
+
+func (vm *VM) fetchCode() []byte {
 	ret := vm.memory.GetContent(vm.reg.ip, 2)
 	vm.reg.ip += 2
 	return ret
