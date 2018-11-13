@@ -1,6 +1,12 @@
 # tinyVM
 tinyVM
 
+# Usage
+```
+make run # run vm, now it fetch first some bytes from Disc to memory
+make test
+```
+
 ## cpu specifications
 * little endian
 * 32 bit instuction code

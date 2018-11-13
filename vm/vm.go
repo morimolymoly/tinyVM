@@ -21,7 +21,7 @@ type Reg struct {
 // VM ... Virtual Machine
 type VM struct {
 	reg    *Reg
-	memory *Memory
+	memory *hw.Memory
 	disc   *hw.Disc
 }
 
@@ -30,7 +30,7 @@ func New() VM {
 	fmt.Println("[*] Creating VM...")
 	vm := VM{
 		reg:    &Reg{},
-		memory: &Memory{},
+		memory: &hw.Memory{},
 		disc:   &hw.Disc{},
 	}
 	vm.memory.Init()
@@ -54,7 +54,7 @@ func (vm *VM) Run() {
 }
 
 func (vm *VM) executeCode(code []byte) bool {
-	op := code[0] & 0xf0
+	op := code[0]
 	if op == 0x0 {
 		return cHlt()
 	}

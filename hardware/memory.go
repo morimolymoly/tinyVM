@@ -1,9 +1,7 @@
-package vm
+package hardware
 
 import (
 	"fmt"
-
-	hw "github.com/morimolymoly/tinyVM/hardware"
 )
 
 // Memory ... memory
@@ -23,7 +21,7 @@ func (m *Memory) Dump() {
 }
 
 // FetchFromDisc ... Fetch data from Disc and fill memory
-func (m *Memory) FetchFromDisc(d *hw.Disc, position, len, moffset int) {
+func (m *Memory) FetchFromDisc(d *Disc, position, len, moffset int) {
 	copy(m.memory[moffset:], d.GetContent(position, len))
 }
 
